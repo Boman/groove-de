@@ -1,6 +1,7 @@
 import webapp2
 
 url = 'http://grooveshark.com'
+html5_url = 'http://grooveshark.com'
 import urllib2
 
 
@@ -11,7 +12,7 @@ class MainHandler(webapp2.RequestHandler):
         self.response.headers['Access-Control-Allow-Origin'] = '*'
         self.response.headers['Access-Control-Allow-Headers'] = 'Content-Type'
 
-        conn = urllib2.urlopen(url)
+        conn = urllib2.urlopen(html5_url if self.request.get('html5') == "true" else url)
         html = conn.read()
 
         self.response.out.write(html)
